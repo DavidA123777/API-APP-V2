@@ -14,7 +14,6 @@ function Congress()
 
   //state variables for treaty stuff - kazi
   const [treatyInput, setTreatyInput] = useState('116'); //just an example of input
-  const [treatyData, setTreatyData] = useState(null); //default vals for this and below
   const [trans, setTreatyTrans] = useState(null);
   //const [rat, setTreatyRat] = useState(null);
 
@@ -112,22 +111,23 @@ function Congress()
       if (data.treaties && data.treaties.length > 0) //extract info
       {
         const treaty = data.treaties[0];
-        const treatySubject = treaty.treatySubject;
-        const transmittedDate = treaty.transmittedDate;
 
-        setTreatyData({treatySubject, transmittedDate,}); //set treaty as an obj, removed ratifiedCongress,
+        dispatch(setTreaty({
+          treatySubject: treaty.treatySubject,
+          transmittedDate:treaty.transmittedDate
+        }))
       } 
       
       else 
       {
-        setError('No information found for this treaty input.');
+        dispatch(setError("No information not found for this member."))
       }
     } 
     
     catch (e) 
     {
       console.error(e); //log error
-      setError(`Failed to fetch treaty data: ${e.message}`);
+      dispatch(setError(`Failed to fetch treaty data: ${e.message}`));
     }
   
     setIsLoading(false);
@@ -138,6 +138,8 @@ function Congress()
   {
     event.preventDefault();
     fetchTreatyData(treatyInput);
+    dispatch(setTreaty(null)); // Reset treaty state
+    dispatch(setError(null)); // Reset error state
   };
 
   //event handler for updating the treaty input field
@@ -207,16 +209,12 @@ function Congress()
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       
-
-      {treatyData && (
+      {treaty && (
         <div>
-          {/* <p>Treaty Information: {treatyData}</p>
-          <p>Date Transmitted: {treatyData.transmittedDate}</p>
-          <p>Congress Ratified: {treatyData.ratifiedCongress}</p> */}
-          <p>Treaty Subject: {treatyData.treatySubject}</p>
-          <p>Transmitted Date: {treatyData.transmittedDate}</p>
+          <p>Treaty Subject: {treaty.treatySubject}</p>
+          <p>Transmitted Date: {treaty.transmittedDate}</p>
           
-        </div>
+      </div>
       )}
       <br></br>
 
