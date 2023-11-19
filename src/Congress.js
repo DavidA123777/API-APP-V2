@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setMemberInfo, setTreaty, setError } from './slices/CongressSlice';
 
 function Congress() 
 {
   //state variables for member stuff - george
-  const [memberName, setMemberName] = useState('L000174');
-  const [fullMemberName, setFullMemberName] = useState(null);
-  const [imageUrl, setImageUrl] = useState("");
-  const [usState, setUSstate] = useState("");
-  const [party, setParty] = useState("");
-  const [memberType, setMemberType] = useState("");
+  const dispatch = useDispatch();
+  const { memberInfo, treaty, error } = useSelector((state) => state.congress);
+
+  const [userSearchMember, setUserSearchMember] = useState('K000377'); //just an example of input
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   //state variables for treaty stuff - kazi
-  const [treatyInput, setTreatyInput] = useState('116'); //just an example of input
-  const [treatyData, setTreatyData] = useState(null); //default vals for this and below
+  const [treatyInput, setTreatyInput] = useState('91'); //just an example of input
   const [trans, setTreatyTrans] = useState(null);
   //const [rat, setTreatyRat] = useState(null);
 
@@ -41,27 +39,22 @@ function Congress()
 
       if (data.member && objectLength > 0) 
       {
-        // parsing the data about Congress Member
         const member = data.member;
-        const fullName = member.directOrderName; 
-        const photo = member.depiction.imageUrl;
-        const state = member.state;
-        const party = member.partyHistory[0].partyName;
-        const memberType = member.terms.pop().memberType;
+      
+        dispatch(setMemberInfo({
+          fullName: member.directOrderName,
+          photo: member.depiction.imageUrl,
+          state: member.state,
+          party: member.partyHistory[0].partyName,
+          memberType: member.terms.pop().memberType
+        }))
         
-        //update state variables with member information
-        setFullMemberName(fullName);
-        setImageUrl(photo);
-        setUSstate(state);
-        setParty(party);
-        setMemberType(memberType);
-
       } 
       
       else 
       {
         //if no information found
-        setError('No information not found for this member.');
+        dispatch(setError("No information not found for this member."))
       }
     } 
     
@@ -69,30 +62,32 @@ function Congress()
     {
       if (e.name === "TypeError" && e.message === "Failed to fetch") //network error catch
       {
-        setError("Network error. Please check your internet connection.");
+        dispatch(setError("Network error. Please check your internet connection."));
+
       } 
       
       else 
       {
-        setError(`Failed to fetch data: ${e.message}`);
+        dispatch(setError(`Failed to fetch data: ${e.message}`));
       }
       
       console.error(e); //log it
     }
   
-    setIsLoading(false); //false if u encounter an error
+    setIsLoading(false); //false if u encounter an error  //////
   };
 
   const handleSubmit = (event) => 
   {
     event.preventDefault();
-    fetchPartyData(memberName); //call function to fetch member data
+    fetchPartyData(userSearchMember); //call function to fetch member data  ////
+    dispatch(setMemberInfo(null)); // Reset member state
+    dispatch(setError(null)); // Reset error state
   };
-
 
   const handleMemberNameChange = (event) => 
   {
-    setMemberName(event.target.value); //update member name state with input value
+    setUserSearchMember(event.target.value); //update member name state with input value
   };
 
   //fetch treaty data
@@ -116,22 +111,23 @@ function Congress()
       if (data.treaties && data.treaties.length > 0) //extract info
       {
         const treaty = data.treaties[0];
-        const treatySubject = treaty.treatySubject;
-        const transmittedDate = treaty.transmittedDate;
 
-        setTreatyData({treatySubject, transmittedDate,}); //set treaty as an obj, removed ratifiedCongress,
+        dispatch(setTreaty({
+          treatySubject: treaty.treatySubject,
+          transmittedDate:treaty.transmittedDate
+        }))
       } 
       
       else 
       {
-        setError('No information found for this treaty input.');
+        dispatch(setError("No information not found for this member."))
       }
     } 
     
     catch (e) 
     {
       console.error(e); //log error
-      setError(`Failed to fetch treaty data: ${e.message}`);
+      dispatch(setError(`Failed to fetch treaty data: ${e.message}`));
     }
   
     setIsLoading(false);
@@ -142,6 +138,8 @@ function Congress()
   {
     event.preventDefault();
     fetchTreatyData(treatyInput);
+    dispatch(setTreaty(null)); // Reset treaty state
+    dispatch(setError(null)); // Reset error state
   };
 
   //event handler for updating the treaty input field
@@ -166,23 +164,24 @@ function Congress()
           Enter Congress Member BioGuide ID:   
           <input
             type="text"
-            value={memberName}
+            value={userSearchMember}
             onChange={handleMemberNameChange}
           />
         </label>
         <button type="submit">Search</button>
       </div>
       </form>
-
-      {fullMemberName && (
-        <div>
-          <img src={imageUrl}/>
-          <p>Full Member Name: {fullMemberName}</p>
-          <p>Member Type: {memberType}</p>
-          <p>State: {usState}</p>
-          <p>Party: {party}</p>
-        </div>
+      
+      {memberInfo && (
+         <div>
+         <img src={memberInfo.photo}/>
+         <p>Full Member Name: {memberInfo.fullName}</p>
+         <p>Member Type: {memberInfo.memberType}</p>
+         <p>State: {memberInfo.state}</p>
+         <p>Party: {memberInfo.party}</p>
+       </div>
       )}
+
 
       <br></br>
 
@@ -210,16 +209,12 @@ function Congress()
       {isLoading && <p>Loading...</p>}
       {error && <p>Error: {error}</p>}
       
-
-      {treatyData && (
+      {treaty && (
         <div>
-          {/* <p>Treaty Information: {treatyData}</p>
-          <p>Date Transmitted: {treatyData.transmittedDate}</p>
-          <p>Congress Ratified: {treatyData.ratifiedCongress}</p> */}
-          <p>Treaty Subject: {treatyData.treatySubject}</p>
-          <p>Transmitted Date: {treatyData.transmittedDate}</p>
+          <p>Treaty Subject: {treaty.treatySubject}</p>
+          <p>Transmitted Date: {treaty.transmittedDate}</p>
           
-        </div>
+      </div>
       )}
       <br></br>
 
