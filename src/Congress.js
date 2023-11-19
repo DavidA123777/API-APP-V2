@@ -9,11 +9,11 @@ function Congress()
   const dispatch = useDispatch();
   const { memberInfo, treaty, error } = useSelector((state) => state.congress);
 
-  const [userSearchMember, setUserSearchMember] = useState('');
+  const [userSearchMember, setUserSearchMember] = useState('K000377'); //just an example of input
   const [isLoading, setIsLoading] = useState(false);
 
   //state variables for treaty stuff - kazi
-  const [treatyInput, setTreatyInput] = useState('116'); //just an example of input
+  const [treatyInput, setTreatyInput] = useState('91'); //just an example of input
   const [trans, setTreatyTrans] = useState(null);
   //const [rat, setTreatyRat] = useState(null);
 
