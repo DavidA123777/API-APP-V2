@@ -152,26 +152,25 @@ function Congress()
   };
   
     return (
-      <div className="center-container">
+      <div className="parliament-container">
       <div>
-        <h1>United States Congress Page</h1>
-
+        <h2 className="parliament-heading">United States Congress Page</h2>
         <h3>Congress Member Information</h3>
         <p>What to input?</p>
-        <p>There exisit a unique identification for each member of Congress. This is the BioGuide ID from the Biographical Directory of Congress: <a href="http://bioguide.congress.gov">bioguide.congress.gov</a> It is alphanumeric and begins with the first letter of the Member's last name, followed by six (6) numeric digits. </p>
-
-        <h5> Sample inputs: K000377, L000174, W000817, S001191, T000278</h5>
+        <p>There exisit a unique identification for each member of Congress. This is the BioGuide ID from the Biographical Directory of Congress: <a href="http://bioguide.congress.gov">bioguide.congress.gov</a>. It is alphanumeric and begins with the first letter of the Member's last name, followed by six (6) numeric digits. </p>
+        <h5>Sample inputs: K000377, L000174, W000817, S001191, T000278</h5>
       <form onSubmit={handleSubmit}>
       <div className="member-name-section">
         <label>
           Enter Congress Member BioGuide ID:   
           <input
+          className="parliament-input"
             type="text"
             value={userSearchMember}
             onChange={handleMemberNameChange}
           />
         </label>
-        <button type="submit">Search</button>
+        <button className="parliament-button" type="submit">Search</button>
       </div>
       </form>
       
@@ -193,19 +192,20 @@ function Congress()
       <h3>Treaty Information</h3>
       <p>What to input?</p>
       <p>When CSPAN or any other broadcasting network mentions that you are watching the 116th Congress in session, it means that they are broadcasting or airing live or recorded sessions of the legislative body. The number refers to the specific congressional session that was in operation during a certain period. In the context of the United States, the U.S. Congress operates in two-year periods called sessions, and each session is numbered consecutively.</p>
-      <h5> Possible inputs: Congressional Sessions 91 through 117</h5>
+      <h5>Possible inputs: Congressional Sessions 91 through 117</h5>
       <p>Note: During some congressional sessions treaties may not have been enacted</p>
       <form onSubmit={handleTreatySubmit}>
       <div className="member-name-section">
         <label>
           Enter Congressional Session Number:
           <input
+            className="parliament-input"
             type="text"
             value={treatyInput}
             onChange={handleTreatyInputChange}
           />
         </label>
-        <button type="submit">Search</button>
+        <button className="parliament-button" type="submit">Search</button>
       </div>
       </form>
 
@@ -223,7 +223,10 @@ function Congress()
 
       <br></br>
       <br></br>
+      <div style={{ textAlign: 'center' }}>
       <p>I want to</p>
+      </div>
+      
       <div className="linkText">
         <Link to="/API-app/parliament">explore the UK parliament</Link>
         <Link to="/API-app">go back to the homepage</Link>
