@@ -4,7 +4,7 @@ A website by the Lally Enthusiasts
 
 ## Project Description
 
-The US Congress & The UK Parliament website is a dynamic React-based web application that calls APIs from two distinct sources: the Congress API and the Parliament API. The website compares information between the members and treaties of the United States Congress and members and treaties of the UK Parliament. Users can search for specific members and retrieve details about their respective legislatures.
+This is version 2 of our website from Assignment 5 with additional Router & Redux elements. The US Congress & The UK Parliament website is a dynamic React-based web application that calls APIs from two distinct sources: the Congress API and the Parliament API. The website compares information between the members and treaties of the United States Congress and the members and treaties of the UK Parliament. Users can search for specific members and retrieve details about their respective legislatures. 
 
 ### Project Features
 
@@ -43,33 +43,32 @@ The US Congress & The UK Parliament website is a dynamic React-based web applica
 - **Member Search:** Users can search for Congress members by their BioGuide ID, which is a unique identification for each member.
 - **Information Display:** Upon searching, the website fetches data from the Congress API, including the full member name, member type, state, party, and an image. This data is then displayed on the page.
 - **Treaty Search:** Users can search for treaties using a treaty number, retrieving details such as treaty subject and transmitted date.
-- **Issues we encountered:** The main issue we encountered was parsing through the data received based on the user input and also displaying it as the results overlapped. Furthermore we had to use the react router in homepage.js to link it to the congress page and parliament page for a more cohesive look. This was the skeleton of the website but this came to cause a github issue when we tried to push it onto github pages because of the reach router which we discovered after we completed the parliament page.
 
 #### Parliament Page
 
 - **Member Search:** Users can search for UK Parliament members by their names.
 - **Information Display:** The website sends an HTTP GET request to the Parliament API, retrieves data, and displays it. This data includes full names, genders, party affiliations, membership placements, start dates, end dates (if applicable), and membership statuses.
 - **Registered Interests:** Users can search for members' registered interests based on specific search terms. The website retrieves the list of members with interests related to the search term and displays their names.
-- **Issues we encountered:** The maiin issue we encountered was how to parse for treaties as it was restricted by the API itself so we settled for the second best comparison to treaties, registered interests. The biggest issue was to publish to github pages because we had a .env to store the API key so the environmental variable had an issue with the gitignore, gitguard and the react router routed all npm start and npm deploy commands to localhost3000/API-App instead of local host 3000 so we had to change that in App.js to fix it. All the commits to main were us debugging the github pages issue by trying a capital K instead of k, HTTP instead of HTTPs and following a lot of videos and articles till we solved it.
 
-### Extra Credit
+### Router Requirements
 
-- **Site and Components Styling:** The site and its components have well-structured styling using CSS, making it visually appealing and user-friendly.
+- **Add multiple paths (3 or more) to your project, managed by a router:** In our `app.js` file, we set up routes for the homepage, Congress page, Parliament page, and a NotFound page. The `<Routes>` component in `app.js` defines paths for the homepage, Congress, Parliament, and any other route (*) that doesn't match fulfilling the requirement for multiple paths.
+- **Add at least one nested route:** In homepage.js, we use `<Outlet/>` which for nested routes with our actual nested routes being `/API-app/congress` and `/API-app/parliament`.
+- **Enable client side routing:** We used react-router-dom in app.js to enable client-side routing and the `<BrowserRouter>` component in `app.js` enables client-side routing, allowing navigation without full page refreshes.
+- **Each page should have some meaningful, unique functionality from the API assignment:** Both the Congress and Parliament pages fetch and display information from their respective APIs based on user input. The Congress page allows users to search for members and treaties, while the Parliament page allows users to search for members and their registered interests.
+- **Add an error element:** The `NotFound` component is rendered when a route that doesn't exist is accessed. `<Route path="*" element={<NotFound/>} /> {}` serves as an error page for non-existent routes, providing a user-friendly error message that can be found in `NotFound.js`
 
-- **Using APIs from Multiple Providers:** We utilized APIs from both the Congress API and Parliament API, integrating data from different sources.
+### Redux Requirements
 
-- **Using Non-Public APIs:** Both the Congress API and the Parliament API are not listed in the Public APIs repository.
-
-- **Foreign Domain:** The Parliament API comes from a foreign domain, with a .uk extension, marking it as a foreign source.
-
-- **Government Entity API:** The Congress API is from a government entity (.gov), aligning with the requirement to use an API from a government entity.
-
-- **Coherent Data Rendering:** Our website seamlessly combines data from both Congress and Parliament APIs, allowing users to compare information about different legislatures.
-
-- **An Amazing ReadMe:** It's awesome.
+- **Create a Redux store to manage your app's state:** The `store.js` file creates a Redux store using `configureStore` from `@reduxjs/toolkit` and the store constant in `store.js` is the Redux store that manages the state for both the Congress and Parliament slices.
+- **Manage all state changes with actions, sent via dispatch:** In both `CongressSlice.js` and `ParliamentSlice.js`, we defined actions (`setMemberInfo`, `setTreaty`, `setError`, etc.) that are dispatched to trigger state changes. These actions are dispatched in `Congress.js` and `Parliament.js` to manage state changes.
+- **Unique actions should have unique types:** Each action type is unique. For example, `setMemberInfo`, `setTreaty`, and `setError` have distinct types which ensures that each action has a clear and unique identifier.
+- **At least one action should have a payload field:** Actions like setMemberInfo and setTreaty have payload fields that carry data. The payload field allows passing relevant data to update the state.
+- **Create reducers to handle incoming actions:** In both `CongressSlice.js` and `ParliamentSlice.js`, we have reducers that handle the state changes based on dispatched actions. These reducers specify how the state changes in response to actions.
+- **Create one or more selectors for getting the store's state:** We directly access the state in components using `useSelector` and the `useSelector` hook is used to retrieve specific pieces of state from the Redux store.
 
 ## GitHub Workflow
 
-Each team member has authored at least one pull request (PR) containing a feature with an API call. All code changes were made using the feature branch workflow, app is deployed on GitHub Pages. Each PR received at least one approval from a teammate before being merged and we actively reviewed and contributed to each other's PRs because the Lally Enthusiasts support each other through thick and thin.
-- The repository link is https://github.com/Kazi27/API-app.git
-- The website link is https://kazi27.github.io/API-app/
+Each team member has authored at least one pull request (PR) containing a feature with an API call. All code changes were made using the feature branch workflow, app is deployed on Netlify. Each PR received at least one approval from a teammate before being merged and we actively reviewed and contributed to each other's PRs because the Lally Enthusiasts support each other through thick and thin.
+- The repository link is https://github.com/DavidA123777/API-APP-V2.git
+- The website link is [insert netlify link here]
