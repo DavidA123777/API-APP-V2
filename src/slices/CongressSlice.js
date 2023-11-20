@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { createSelector } from '@reduxjs/toolkit'; //new addition for the selector
 
 const congressSlice = createSlice({
   name: 'congress',
@@ -23,4 +24,5 @@ const congressSlice = createSlice({
 });
 
 export const { setMemberInfo, setTreaty, setError } = congressSlice.actions;
+export const selectCongressMemberInfo = (state) => state.congress.memberInfo; //selector to get Congress member info
 export default congressSlice.reducer;

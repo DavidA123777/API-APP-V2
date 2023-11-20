@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMemberInfo, setTreaty, setError } from './slices/CongressSlice';
+import { selectCongressMemberInfo } from './slices/CongressSlice'; 
 
 function Congress() 
 {
@@ -11,6 +12,8 @@ function Congress()
 
   const [userSearchMember, setUserSearchMember] = useState('K000377'); //just an example of input
   const [isLoading, setIsLoading] = useState(false);
+
+  const congressMemberInfo = useSelector(selectCongressMemberInfo);
 
   //state variables for treaty stuff - kazi
   const [treatyInput, setTreatyInput] = useState('91'); //just an example of input
@@ -172,7 +175,7 @@ function Congress()
       </div>
       </form>
       
-      {memberInfo && (
+      {congressMemberInfo && (
          <div>
          <img src={memberInfo.photo}/>
          <p>Full Member Name: {memberInfo.fullName}</p>
