@@ -65,7 +65,12 @@ This is version 2 of our website from Assignment 5 with additional Router & Redu
 - **Unique actions should have unique types:** Each action type is unique. For example, `setMemberInfo`, `setTreaty`, and `setError` have distinct types which ensures that each action has a clear and unique identifier.
 - **At least one action should have a payload field:** Actions like setMemberInfo and setTreaty have payload fields that carry data. The payload field allows passing relevant data to update the state.
 - **Create reducers to handle incoming actions:** In both `CongressSlice.js` and `ParliamentSlice.js`, we have reducers that handle the state changes based on dispatched actions. These reducers specify how the state changes in response to actions.
-- **Create one or more selectors for getting the store's state:** We directly access the state in components using `useSelector` and the `useSelector` hook is used to retrieve specific pieces of state from the Redux store.
+- **Create one or more selectors for getting the store's state:** A selector takes the Redux state as an argument and returns a specific piece of that state. Our `selectCongressMemberInfo` does that as defined in the `CongressSlice.js` file and is then used in `Congress.js`.
+
+#### Extra Features
+- **Styling:** We added cohesive styling and maintained similar layouts for both pages
+- **Edge Cases:** We solved edge cases related to rendering components
+- **Clarifying Comments:** We added comments to describe what each section of the code does to follow along for anyone to understand.
 
 ## GitHub Workflow
 
