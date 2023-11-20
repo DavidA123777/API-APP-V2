@@ -7,8 +7,8 @@ const Parliament = () => {
   const dispatch = useDispatch();
   const { memberInfo, interests, error } = useSelector((state) => state.parliament);
 
-  const [memberName, setMemberName] = useState('');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [memberName, setMemberName] = useState('Rishi Sunak');
+  const [searchTerm, setSearchTerm] = useState('Business');
 
   const fetchMemberData = async (name) => {
     try {
@@ -74,10 +74,14 @@ const Parliament = () => {
   };
 
   return (
-<div className="parliament-container">
-<h2 className="parliament-heading">Party Information</h2>
-      <h3>Parliament Member Name Examples: Rishi Sunak, Keir Starmer, Suella Braverman, Grant Shapps, etc</h3>
+  <div className="parliament-container">
+    <h2 className="parliament-heading">United Kingdom Parliament Page</h2>
+    <h3>Parliament Party Information</h3>
+    <p>What to input?</p>
+    <p>There are 650 MPs and Lords in the UK parliament currently and you can search for information regarding them from <a href="https://members.parliament.uk/members/commons">members.parliament.uk/members</a>.</p>
+  <h5>Sample inputs: Rishi Sunak, Keir Starmer, Suella Braverman, Grant Shapps</h5>
       <form onSubmit={handleMemberSubmit}>
+      <div className="member-name-section">
         <label>
           Input Parliament Member's Name:
           <input
@@ -88,6 +92,7 @@ const Parliament = () => {
           />
         </label>
         <button className="parliament-button" type="submit">Display Info</button>
+        </div>
       </form>
 
       {error && <p>Error: {error}</p>}
@@ -116,9 +121,13 @@ const Parliament = () => {
 <br></br>
 <br></br>
 
-      <h2 className="parliament-heading">Registered Interests</h2>
-      <h3>Search Term Examples: Business, Environment, Health, etc</h3>
+      <h3>Registered Interests</h3>
+      <p>What to input?</p>
+      <p>To obtain information regarding which Lords are involved in registered interets, you simply have search for subject groups for that registered interest which can be found on <a href="https://publications.parliament.uk/pa/cm/cmallparty/231101/contents.htm">publications.parliament.uk</a></p>
+      <p>Note: If certain subject areas such as Zoroastrian does not yield any results, no lords are involved with that registered interest.</p>
+      <h5>Possible Inputs: Business, Environment, Health, Disability, Literacy</h5>
       <form onSubmit={handleInterestsSubmit}>
+      <div className="member-name-section">
         <label>
           Input Search Term:
           <input
@@ -130,6 +139,7 @@ const Parliament = () => {
           />
         </label>
         <button className="parliament-button"  type="submit">Display Interests</button>
+        </div>
       </form>
 
       {error && <p className="parliament-error">Error: {error}</p>}
