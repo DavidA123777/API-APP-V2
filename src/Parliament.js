@@ -96,16 +96,7 @@ const Parliament = () => {
       </form>
 
       {error && <p>Error: {error}</p>}
-      {interests && interests.length > 0 && (
-        <div>
-          <p>Name of member with this interest:</p>
-          <ul>
-            {interests.map((interest, index) => (
-              <li key={index}>{interest.value.member.nameFullTitle}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+      
       {memberInfo && (
         <div>
           <p>Name: {memberInfo.fullMemberName}</p>
