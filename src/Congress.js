@@ -74,18 +74,18 @@ function Congress()
         dispatch(setError(`Failed to fetch data: ${e.message}`));
       }
       
-      console.error(e); //log it
+      //console.error(e); //log it but commented out for grading
     }
   
-    setIsLoading(false); //false if u encounter an error  //////
+    setIsLoading(false); //false if u encounter an error
   };
 
   const handleSubmit = (event) => 
   {
     event.preventDefault();
-    fetchPartyData(userSearchMember); //call function to fetch member data  ////
-    dispatch(setMemberInfo(null)); // Reset member state
-    dispatch(setError(null)); // Reset error state
+    fetchPartyData(userSearchMember); //call function to fetch member data
+    dispatch(setMemberInfo(null)); //reset member state
+    dispatch(setError(null)); //reset error state
   };
 
   const handleMemberNameChange = (event) => 
@@ -129,7 +129,7 @@ function Congress()
     
     catch (e) 
     {
-      console.error(e); //log error
+      //console.error(e); //log error, commented out for grading purposes
       dispatch(setError(`Failed to fetch treaty data: ${e.message}`));
     }
   
@@ -141,8 +141,8 @@ function Congress()
   {
     event.preventDefault();
     fetchTreatyData(treatyInput);
-    dispatch(setTreaty(null)); // Reset treaty state
-    dispatch(setError(null)); // Reset error state
+    dispatch(setTreaty(null)); //reset treaty state
+    dispatch(setError(null)); //reset error state
   };
 
   //event handler for updating the treaty input field
@@ -151,62 +151,59 @@ function Congress()
     setTreatyInput(event.target.value);
   };
   
-    return (
-      <div className="parliament-container">
+  return (
+    <div className="parliament-container">
       <div>
         <h2 className="parliament-heading">United States Congress Page</h2>
         <h3>Congress Member Information</h3>
         <p>What to input?</p>
         <p>There exisit a unique identification for each member of Congress. This is the BioGuide ID from the Biographical Directory of Congress: <a href="http://bioguide.congress.gov">bioguide.congress.gov</a>. It is alphanumeric and begins with the first letter of the Member's last name, followed by six (6) numeric digits. </p>
         <h5>Sample inputs: K000377, L000174, W000817, S001191, T000278</h5>
-      <form onSubmit={handleSubmit}>
-      <div className="member-name-section">
-        <label>
-          Enter Congress Member BioGuide ID:   
-          <input
-          className="parliament-input"
-            type="text"
-            value={userSearchMember}
-            onChange={handleMemberNameChange}
-          />
-        </label>
-        <button className="parliament-button" type="submit">Search</button>
-      </div>
-      </form>
-      
-      {congressMemberInfo && (
-         <div>
-         <img src={memberInfo.photo}/>
-         <p>Full Member Name: {memberInfo.fullName}</p>
-         <p>Member Type: {memberInfo.memberType}</p>
-         <p>State: {memberInfo.state}</p>
-         <p>Party: {memberInfo.party}</p>
-       </div>
-      )}
+        <form onSubmit={handleSubmit}>
+          <div className="member-name-section">
+            <label> Enter Congress Member BioGuide ID:   
+              <input
+                className="parliament-input"
+                type="text"
+                value={userSearchMember}
+                onChange={handleMemberNameChange}
+              />
+            </label>
+            <button className="parliament-button" type="submit">Search</button>
+          </div>
+        </form>
 
+        {congressMemberInfo && (
+        <div>
+          <img src={memberInfo.photo}/>
+          <p>Full Member Name: {memberInfo.fullName}</p>
+          <p>Member Type: {memberInfo.memberType}</p>
+          <p>State: {memberInfo.state}</p>
+          <p>Party: {memberInfo.party}</p>
+        </div>
+        )}
 
-      <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
 
-      <br></br>
-      <br></br>
-      <h3>Treaty Information</h3>
-      <p>What to input?</p>
-      <p>When CSPAN or any other broadcasting network mentions that you are watching the 116th Congress in session, it means that they are broadcasting or airing live or recorded sessions of the legislative body. The number refers to the specific congressional session that was in operation during a certain period. In the context of the United States, the U.S. Congress operates in two-year periods called sessions, and each session is numbered consecutively.</p>
-      <h5>Possible inputs: Congressional Sessions 91 through 117</h5>
-      <p>Note: During some congressional sessions treaties may not have been enacted</p>
-      <form onSubmit={handleTreatySubmit}>
-      <div className="member-name-section">
-        <label>
-          Enter Congressional Session Number:
-          <input
-            className="parliament-input"
-            type="text"
-            value={treatyInput}
-            onChange={handleTreatyInputChange}
-          />
-        </label>
-        <button className="parliament-button" type="submit">Search</button>
-      </div>
+        <h3>Treaty Information</h3>
+        <p>What to input?</p>
+        <p>When CSPAN or any other broadcasting network mentions that you are watching the 116th Congress in session, it means that they are broadcasting or airing live or recorded sessions of the legislative body. The number refers to the specific congressional session that was in operation during a certain period. In the context of the United States, the U.S. Congress operates in two-year periods called sessions, and each session is numbered consecutively.</p>
+        <h5>Possible inputs: Congressional Sessions 91 through 117</h5>
+        <p>Note: During some congressional sessions treaties may not have been enacted</p>
+        <form onSubmit={handleTreatySubmit}>
+          <div className="member-name-section">
+            <label> Enter Congressional Session Number:
+              <input
+                className="parliament-input"
+                type="text"
+                value={treatyInput}
+                onChange={handleTreatyInputChange}
+              />
+            </label>
+            <button className="parliament-button" type="submit">Search</button>
+          </div>
       </form>
 
       {isLoading && <p>Loading...</p>}
@@ -215,26 +212,26 @@ function Congress()
       {treaty && (
         <div>
           <p>Treaty Subject: {treaty.treatySubject}</p>
-          <p>Transmitted Date: {treaty.transmittedDate}</p>
-          
+          <p>Transmitted Date: {treaty.transmittedDate}</p>     
       </div>
       )}
-      <br></br>
 
       <br></br>
       <br></br>
+      <br></br>
+
       <div style={{ textAlign: 'center' }}>
-      <p>I want to</p>
+        <p>I want to</p>
       </div>
-      
+    
       <div className="linkText">
         <Link to="/API-app/parliament">explore the UK parliament</Link>
         <Link to="/API-app">go back to the homepage</Link>
       </div>
 
       </div>
-      </div>
-    );
+    </div>
+  );
 }
 
 export default Congress;

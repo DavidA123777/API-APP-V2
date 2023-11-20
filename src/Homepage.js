@@ -24,7 +24,7 @@ function Homepage() {
         <Link to="/API-app/parliament">Find more information regarding the UK Parliament through the Parliament API here.</Link>
       </div>
 
-      <Outlet /> {/* This is where the nested routes will render */}
+      <Outlet /> {/* This is where the nested routes mentioned in app.js will render */}
 
     </div>
   );
