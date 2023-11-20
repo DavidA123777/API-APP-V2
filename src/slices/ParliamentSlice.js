@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+//this file is pretty similar to congressslice.js except the selector, u use createSlice to define a portion of the Redux state named 'parliament' w/ initial state & reducers
+//next up u have ur reducers (setMemberInfo, setInterests, setError) that define how the state is updated to different actions
+//they modify the state based on the provided payload and then you export this, could've used a selector here too tbh
 const parliamentSlice = createSlice({
   name: 'parliament',
   initialState: {
