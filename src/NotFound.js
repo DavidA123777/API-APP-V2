@@ -5,7 +5,7 @@ const NotFound = () => { //new component
       <h2 className="parliament-heading">No page found</h2>
       <h2>Sorry, the page you are looking for does not exist.</h2>
     </div> 
-  );
+  );//consistent styling ofc
 };
 
 export default NotFound;

@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from '@reduxjs/toolkit'; //new addition for the selector
 
 const congressSlice = createSlice({
-  name: 'congress',
-  initialState: {
+  name: 'congress', //u use this in store.js
+  initialState: { //initial state of the slice of memberInfo, treaty & error
     memberInfo: null,
     treaty: null,
     error: null,
   },
-  reducers: {
+  reducers: { //reducers define how the state is updated in response to actions so how the site changes as you set member info, treaties and when u uncounter an error
     setMemberInfo(state, action) {
       state.memberInfo = action.payload;
       state.error = null;
