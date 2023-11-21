@@ -17,8 +17,8 @@ function App() { // added error handling component
       <Router basename={basename}>
         <Routes>
           <Route path="/" element={<Homepage />} />
-          <Route path="/congress" element={<Congress />} />
-          <Route path="/parliament" element={<Parliament />} />
+          <Route path="/api-app/congress" element={<Congress />} />
+          <Route path="/api-app/parliament" element={<Parliament />} />
           <Route path="*" element={<NotFound/>} /> {} 
         </Routes>
       </Router>

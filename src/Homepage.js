@@ -20,8 +20,8 @@ function Homepage() {
       </div>
       
       <div className="linkText">
-        <Link to="/congress">Find more information regarding the US Congress through the Congress API here.</Link>
-        <Link to="/parliament">Find more information regarding the UK Parliament through the Parliament API here.</Link>
+        <Link to="/api-app/congress">Find more information regarding the US Congress through the Congress API here.</Link>
+        <Link to="/api-app/parliament">Find more information regarding the UK Parliament through the Parliament API here.</Link>
       </div>
 
       <Outlet /> {/* This is where the nested routes mentioned in app.js will render */}

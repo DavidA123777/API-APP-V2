@@ -162,7 +162,7 @@ const Parliament = () => {
       </div>
 
       <div className="linkText">
-        <Link to="/congress">explore the US congress</Link>
+        <Link to="/api-app/congress">explore the US congress</Link>
         <Link to="/">go back to the homepage</Link>
       </div>
     </div>
