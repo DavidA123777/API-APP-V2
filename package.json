@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Kazi27.github.io/API-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
@@ -10,16 +9,17 @@
     "react-scripts": "^5.0.0",
     "redux": "^4.2.1"
   },
+  "main": "src/index.js",
   "name": "vy6j3f",
   "description": null,
   "version": "0.0.0",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PUBLIC_URL=/API-app react-scripts start",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:netlify": "REACT_APP_BASENAME=/ react-scripts build"
   },
   "browserslist": {
     "production": [
