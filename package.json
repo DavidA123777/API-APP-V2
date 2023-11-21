@@ -14,11 +14,12 @@
   "description": null,
   "version": "0.0.0",
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PUBLIC_URL=/API-app react-scripts start",
     "predeploy": "npm run build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:netlify": "REACT_APP_BASENAME=/ react-scripts build"
   },
   "browserslist": {
     "production": [
