@@ -1,5 +1,5 @@
 {
-  "homepage": "/API-app".
+  "homepage": "/API-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
