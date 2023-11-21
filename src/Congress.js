@@ -225,8 +225,8 @@ function Congress()
       </div>
     
       <div className="linkText">
-        <Link to="/API-app/parliament">explore the UK parliament</Link>
-        <Link to="/API-app">go back to the homepage</Link>
+        <Link to="/parliament">explore the UK parliament</Link>
+        <Link to="/">go back to the homepage</Link>
       </div>
 
       </div>

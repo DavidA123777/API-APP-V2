@@ -13,6 +13,7 @@ function App() { // added error handling component
 
   return (
     <div className="App">
+      {/* our nested route begins here by using a basename route "API-app" followed by the next route */}
       <Router basename={basename}>
         <Routes>
           <Route path="/" element={<Homepage />} />
