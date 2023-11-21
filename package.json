@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Kazi27.github.io/API-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "axios": "^1.6.0",
